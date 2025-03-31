@@ -3,7 +3,39 @@
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## Get started
+# Travel Glide 🌍
 
+Welcome to **Travel Glide**, a beautifully designed travel app built with [Expo](https://expo.dev) and React Native. This app helps you explore destinations, discover new places, and plan your next adventure.
+
+![Travel Glide Splash](./assets/images/design-challenge-travel-app.webp)
+
+## 🚀 Features
+
+- **Explore Destinations**: Discover amazing places to visit.
+- **Favorites**: Save your favorite destinations for easy access.
+- **User-Friendly Interface**: A clean and intuitive design for seamless navigation.
+
+## 🛠️ Installation and Running
+
+### 1. Install Dependencies
+
+Run the following command to install all required dependencies:
+
+```bash
+npm install
+```
+
+### 2. Start the App
+
+Launch the app using Expo:
+
+```bash
+npx expo start
+```
+
+---
+
+Enjoy exploring with Travel Glide! ✨
 1. Install dependencies
 
    ```bash
