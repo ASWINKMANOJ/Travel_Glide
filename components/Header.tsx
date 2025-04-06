@@ -5,12 +5,19 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { useFonts } from "expo-font";
 import Feather from "@expo/vector-icons/Feather";
+import { useRouter } from "expo-router";
 
 const Header: React.FC = () => {
+  const router = useRouter(); // Move useRouter to the top level of the component
+
+  const handleNav = () => {
+    router.push("/Onboarding");
+  };
   const [fontsLoaded] = useFonts({
     "Montserrat-SemiBold": require("../assets/fonts/Montserrat-SemiBold.ttf"),
     "Montserrat-Thin": require("../assets/fonts/Montserrat-Thin.ttf"),
@@ -31,10 +38,12 @@ const Header: React.FC = () => {
           </Text>
         </View>
         <View style={styles.profileIcon}>
-          <Image
-            source={require("../assets/images/40.jpg")}
-            style={{ width: "100%", height: "100%" }}
-          />
+          <TouchableOpacity onLongPress={handleNav}>
+            <Image
+              source={require("../assets/images/40.jpg")}
+              style={{ width: "100%", height: "100%" }}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.searchBar}>
