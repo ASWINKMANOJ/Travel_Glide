@@ -12,10 +12,11 @@ import { useFonts } from "expo-font";
 import Feather from "@expo/vector-icons/Feather";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuthProvider } from "../context/AuthContext";
 
 const Header: React.FC = () => {
   const router = useRouter();
-  // Move useRouter to the top level of the component
+  const { userData } = useAuthProvider();
 
   const handleNav = async () => {
     try {
@@ -24,10 +25,9 @@ const Header: React.FC = () => {
       router.replace("/(auth)/onboard");
     } catch (error) {
       console.error("Error clearing AsyncStorage:", error);
-    } finally {
-      router.replace("/(auth)/onboard");
     }
   };
+
   const [fontsLoaded] = useFonts({
     "Montserrat-SemiBold": require("../assets/fonts/Montserrat-SemiBold.ttf"),
     "Montserrat-Thin": require("../assets/fonts/Montserrat-Thin.ttf"),
@@ -42,7 +42,13 @@ const Header: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <View>
-          <Text style={styles.profileText}>Hello Vanessa,</Text>
+          <Text style={styles.profileText}>
+            Hello{" "}
+            {userData?.name
+              ? userData?.name.charAt(0).toUpperCase() + userData?.name.slice(1)
+              : "User"}
+            ,
+          </Text>
           <Text style={{ fontFamily: "Montserrat-Regular", color: "#5F5F5F" }}>
             Welcome to TripGlide
           </Text>
@@ -50,7 +56,11 @@ const Header: React.FC = () => {
         <View style={styles.profileIcon}>
           <TouchableOpacity onLongPress={handleNav}>
             <Image
-              source={require("../assets/images/40.jpg")}
+              source={
+                userData?.profilePhoto
+                  ? { uri: userData.profilePhoto }
+                  : require("../assets/images/profile.png")
+              }
               style={{ width: "100%", height: "100%" }}
             />
           </TouchableOpacity>

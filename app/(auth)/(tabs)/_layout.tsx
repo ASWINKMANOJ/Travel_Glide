@@ -16,7 +16,7 @@ export default function TabNavigation() {
   } else if (!loading && !onboard) {
     return <Redirect href={"/(auth)/onboard"} />;
   } else if (!loading && !userData) {
-    return <Redirect href={"/(auth)/login"} />;
+    return <Redirect href={"/(auth)/signup"} />;
   }
 
   return (

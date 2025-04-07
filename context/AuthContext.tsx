@@ -8,11 +8,15 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextType {
-  userData: { name: string; profilePhoto: string } | null;
+  userData: { name: string; profilePhoto: string | null; email: string } | null;
   loading: boolean;
   isLoggedIn: boolean;
   onboard: boolean;
-  setUserData: (data: { name: string; profilePhoto: string }) => Promise<void>;
+  setUserData: (data: {
+    name: string;
+    profilePhoto: string | null;
+    email: string;
+  }) => Promise<void>;
   setOnboardComplete: () => Promise<void>;
 }
 
@@ -30,7 +34,8 @@ export function useAuthProvider() {
 export function AuthProvider({ children }: PropsWithChildren) {
   const [userData, setUserDataState] = useState<{
     name: string;
-    profilePhoto: string;
+    profilePhoto: string | null;
+    email: string;
   } | null>(null);
   const [loading, setLoading] = useState(true);
   const [onboard, setOnboard] = useState(false);
@@ -59,7 +64,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
     loadUserData();
   }, []);
 
-  const setUserData = async (data: { name: string; profilePhoto: string }) => {
+  const setUserData = async (data: {
+    name: string;
+    profilePhoto: string | null;
+    email: string;
+  }) => {
     try {
       await AsyncStorage.setItem("userProfile", JSON.stringify(data));
       setUserDataState(data);

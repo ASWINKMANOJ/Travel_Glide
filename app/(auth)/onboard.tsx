@@ -1,3 +1,4 @@
+import { useAuthProvider } from "@/context/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
 import { useRouter } from "expo-router";
@@ -12,6 +13,7 @@ import {
 } from "react-native";
 
 export default function Onboarding() {
+  const { setOnboardComplete } = useAuthProvider();
   const route = useRouter();
   const [fontsLoaded] = useFonts({
     "Montserrat-SemiBold": require("../../assets/fonts/Montserrat-SemiBold.ttf"),
@@ -25,11 +27,11 @@ export default function Onboarding() {
 
   const handlePress = async () => {
     try {
-      await AsyncStorage.setItem("@onboarded", "true");
+      await setOnboardComplete();
     } catch (error) {
       console.error("Error setting onboarding status:", error);
     } finally {
-      route.replace("/(auth)/login");
+      route.replace("/(auth)/signup");
     }
   };
 
