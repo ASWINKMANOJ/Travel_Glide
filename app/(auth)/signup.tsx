@@ -129,7 +129,7 @@ export default function SignUp() {
         />
         <View style={[styles.inputContainer, { width: width }]}>
           <TextInput
-            style={[styles.input, { width: "100%" }]}
+            style={{ flex: 1 }}
             placeholder="Password"
             secureTextEntry={!showPassword}
             value={password}
@@ -140,12 +140,13 @@ export default function SignUp() {
               name={showPassword ? "eye-off" : "eye"}
               size={24}
               color="gray"
+              style={{ marginHorizontal: 8 }}
             />
           </TouchableOpacity>
         </View>
         <View style={[styles.inputContainer, { width: width }]}>
           <TextInput
-            style={[styles.input, { width: "100%" }]}
+            style={{ flex: 1 }}
             placeholder="Confirm Password"
             secureTextEntry={!showConfirmPassword}
             value={confirm}
@@ -156,6 +157,7 @@ export default function SignUp() {
               name={showConfirmPassword ? "eye-off" : "eye"}
               size={24}
               color="gray"
+              style={{ marginHorizontal: 8 }}
             />
           </TouchableOpacity>
         </View>
