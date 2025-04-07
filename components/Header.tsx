@@ -11,12 +11,22 @@ import {
 import { useFonts } from "expo-font";
 import Feather from "@expo/vector-icons/Feather";
 import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Header: React.FC = () => {
-  const router = useRouter(); // Move useRouter to the top level of the component
+  const router = useRouter();
+  // Move useRouter to the top level of the component
 
-  const handleNav = () => {
-    router.push("/Onboarding");
+  const handleNav = async () => {
+    try {
+      await AsyncStorage.clear();
+      console.log("AsyncStorage cleared");
+      router.replace("/(auth)/onboard");
+    } catch (error) {
+      console.error("Error clearing AsyncStorage:", error);
+    } finally {
+      router.replace("/(auth)/onboard");
+    }
   };
   const [fontsLoaded] = useFonts({
     "Montserrat-SemiBold": require("../assets/fonts/Montserrat-SemiBold.ttf"),
